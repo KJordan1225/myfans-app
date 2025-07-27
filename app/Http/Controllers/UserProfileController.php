@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\UserProfile;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
+use App\Models\UserProfile;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
@@ -112,6 +112,8 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $userProfile = UserProfile::find($id);
+
         $validated = $request->validate([
             'display_name' => 'required|string|max:255',
             'bio'          => 'nullable|string',

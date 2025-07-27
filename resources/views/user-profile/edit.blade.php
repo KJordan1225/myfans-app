@@ -41,23 +41,29 @@
                             <!-- Avatar Upload -->
                             <div class="mb-4">
                                 <label for="avatar" class="block font-semibold">Avatar (optional)</label>
-                                <input type="file" name="avatar" id="avatar" class="text-black w-full">
-                                @if ($profile->avatar)
-                                    <div class="mt-2">
-                                        <img src="{{ asset('storage/' . $profile->avatar) }}" alt="Current Avatar" class="w-32 h-32 object-cover rounded">
-                                    </div>
-                                @endif
+                                <input type="file" name="avatar" id="avatar" class="w-full" accept="image/*" onchange="previewImage(this, 'avatar-preview')">
+
+                                <div class="mt-2">
+                                    <img
+                                        id="avatar-preview"
+                                        src="{{ $profile->avatar ? asset('storage/' . $profile->avatar) : '#' }}"
+                                        alt="Avatar Preview"
+                                        class="w-32 h-32 object-cover rounded border {{ $profile->avatar ? '' : 'hidden' }}">
+                                </div>
                             </div>
 
                             <!-- Banner Upload -->
                             <div class="mb-4">
                                 <label for="banner" class="block font-semibold">Banner (optional)</label>
-                                <input type="file" name="banner" id="banner" class="text-black w-full">
-                                @if ($profile->banner)
-                                    <div class="mt-2">
-                                        <img src="{{ asset('storage/' . $profile->banner) }}" alt="Current Banner" class="w-full h-32 object-cover rounded">
-                                    </div>
-                                @endif
+                                <input type="file" name="banner" id="banner" class="w-full" accept="image/*" onchange="previewImage(this, 'banner-preview')">
+
+                                <div class="mt-2">
+                                    <img
+                                        id="banner-preview"
+                                        src="{{ $profile->banner ? asset('storage/' . $profile->banner) : '#' }}"
+                                        alt="Banner Preview"
+                                        class="w-full h-32 object-cover rounded border {{ $profile->banner ? '' : 'hidden' }}">
+                                </div>
                             </div>
 
                             <!-- Website -->
@@ -111,6 +117,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+    function previewImage(input, targetId) {
+        const file = input.files[0];
+        const preview = document.getElementById(targetId);
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "#";
+            preview.classList.add('hidden');
+        }
+    }
+</script>
 @endsection
 
 
