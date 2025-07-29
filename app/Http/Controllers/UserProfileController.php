@@ -159,4 +159,26 @@ class UserProfileController extends Controller
     {
         //
     }
+
+    /**
+     * Show a public user profile based on their @username.
+     */
+    public function showByUsername(string $username)
+    {
+        // Strip the '@' if it exists
+        $username = ltrim($username, '@');
+        
+        // Find the user by username or return 404
+        $user = User::where('username', $username)->firstOrFail();
+
+        // Load the related UserProfile (assuming hasOne relationship)
+        $profile = $user->userProfile;
+
+        // Optionally load other data: posts, subscriptions, etc.
+
+        return view('profiles.public', [
+            'user'    => $user,
+            'profile' => $profile,
+        ]);
+    }
 }
