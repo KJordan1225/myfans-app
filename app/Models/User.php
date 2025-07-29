@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function isCreator(): bool
+    {
+        return optional($this->profile)->is_creator === true;
+    }
 }

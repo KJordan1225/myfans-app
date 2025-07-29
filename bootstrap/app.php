@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Middleware\CreatorOnly;
 use Illuminate\Foundation\Application;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -11,7 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'creator' => CreatorOnly::class,
+            'auth' => Authenticate::class, // Laravel's default auth middleware is already aliased by default
+            // Add more aliases here
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
