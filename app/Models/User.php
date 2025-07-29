@@ -6,6 +6,7 @@ namespace App\Models;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -56,6 +57,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function post(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }   
 
     public function isCreator(): bool
     {
