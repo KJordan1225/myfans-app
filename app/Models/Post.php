@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
@@ -19,5 +20,10 @@ class Post extends Model
     public function profile(): BelongsTo
     {
         return $this->belongsto(User::class);
+    }
+
+    public function media(): HasMany
+    {
+        return $this->hasMany(Media::class);
     }
 }
