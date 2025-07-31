@@ -7,7 +7,7 @@
                 dark:text-gray-200 
                 leading-tight"
     >
-        {{ __('Dashboard') }}
+        {{ __('Create Post') }}
     </h2>
 @endsection
 
@@ -21,18 +21,39 @@
 					<form action="#" method="POST" enctype="multipart/form-data">
 						@csrf
 
-						<input type="text" name="title" placeholder="Post title" required>
-						<textarea name="body" required></textarea>
+						<div class="mb-4">
+                            <label for="title" class="block font-semibold">Title</label>
+                            <input type="text" name="title" id="title"
+                                class="w-full border rounded p-2 text-black" value="{{ old('title') }}" required>
+						</div>
 
-						<select name="visibility" required>
-							<option value="public">Public</option>
-							<option value="subscribers">Subscribers Only</option>
-						</select>
+                        <div class="mb-4">
+                            <label for="body" class="block font-semibold">Body</label>
+                            <textarea name="body" id="body" rows="4"
+                                class="w-full border rounded p-2 text-black" required>{{ old('body') }}</textarea>
+						</div>
 
-						<input type="number" name="price" step="0.01" placeholder="Price (optional)">
-						<input type="file" name="image" accept="image/*">
+						<div class="mb-4">
+                            <label for="visibility" class="block font-semibold">Visibility</label>
+                            <select name="visibility" id="visibility" required class="text-black">
+                                <option value="public">Public</option>
+                                <option value="subscribers">Subscribers</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
 
-						<button type="submit">Post</button>
+						<div class="mb-4">
+                            <label for="price" class="block font-semibold">Price</label>
+                            <input type="number" name="price" id="price" step="0.01" placeholder="Price (optional)"
+                                class="w-full border rounded p-2 text-black">
+						</div>
+
+                        <div class="mb-4">
+                            <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+                                Post
+                            </button>
+                        </div>
+
 					</form>
 				
 				
