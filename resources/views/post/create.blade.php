@@ -1,64 +1,87 @@
 @extends('layouts.app')
 
-@section('header')
-    <h2 class="font-semibold 
-                text-xl
-                text-gray-800 
-                dark:text-gray-200 
-                leading-tight"
-    >
-        {{ __('Create Post') }}
-    </h2>
+@section('title')
+    Dashboard
 @endsection
 
 @section('content')
-    <div class="py-12" style="margin-left: 250px;">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-				
-				
-					<form action="#" method="POST" enctype="multipart/form-data">
-						@csrf
+    <div class="row">
+        <!-- sidebar here -->
+        @include('layouts.components.sidebar')
+        <div class="col-md-9">
+            <h3 class="my-3">Create Post</h3>
+            <hr />
+            <div class="row mt-2">
+                <div class="col-md-4">
+                    <form action="#" method="POST">
+                        @csrf
+                        @if(isset($post))
+                            @method('PUT')
+                        @endif
 
-						<div class="mb-4">
-                            <label for="title" class="block font-semibold">Title</label>
-                            <input type="text" name="title" id="title"
-                                class="w-full border rounded p-2 text-black" value="{{ old('title') }}" required>
-						</div>
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text"
+                                name="title"
+                                id="title"
+                                class="form-control"
+                                value="{{ old('title', $post->title ?? '') }}"
+                                required>
+                        </div>
 
-                        <div class="mb-4">
-                            <label for="body" class="block font-semibold">Body</label>
-                            <textarea name="body" id="body" rows="4"
-                                class="w-full border rounded p-2 text-black" required>{{ old('body') }}</textarea>
-						</div>
+                        <!-- Body -->
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Post Content</label>
+                            <textarea name="body"
+                                    id="body"
+                                    class="form-control"
+                                    rows="5"
+                                    placeholder="Write your post here...">{{ old('body', $post->body ?? '') }}</textarea>
+                        </div>
 
-						<div class="mb-4">
-                            <label for="visibility" class="block font-semibold">Visibility</label>
-                            <select name="visibility" id="visibility" required class="text-black">
-                                <option value="public">Public</option>
-                                <option value="subscribers">Subscribers</option>
-                                <option value="paid">Paid</option>
+                        <!-- Price (only shown if paid visibility is selected with JavaScript, but always rendered for now) -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price (USD)</label>
+                            <input type="number"
+                                step="0.01"
+                                name="price"
+                                id="price"
+                                class="form-control"
+                                value="{{ old('price', $post->price ?? '') }}"
+                                placeholder="Optional price if post is paid">
+                        </div>
+
+                        <!-- Is Paid -->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox"
+                                name="is_paid"
+                                id="is_paid"
+                                class="form-check-input"
+                                value="1"
+                                {{ old('is_paid', $post->is_paid ?? false) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_paid">This is a paid post</label>
+                        </div>
+
+                        <!-- Visibility -->
+                        <div class="mb-3">
+                            <label for="visibility" class="form-label">Visibility</label>
+                            <select name="visibility" id="visibility" class="form-select" required>
+                                <option value="public" {{ old('visibility', $post->visibility ?? 'public') === 'public' ? 'selected' : '' }}>Public</option>
+                                <option value="subscribers" {{ old('visibility', $post->visibility ?? '') === 'subscribers' ? 'selected' : '' }}>Subscribers Only</option>
+                                <option value="paid" {{ old('visibility', $post->visibility ?? '') === 'paid' ? 'selected' : '' }}>Paid</option>
                             </select>
                         </div>
 
-						<div class="mb-4">
-                            <label for="price" class="block font-semibold">Price</label>
-                            <input type="number" name="price" id="price" step="0.01" placeholder="Price (optional)"
-                                class="w-full border rounded p-2 text-black">
-						</div>
-
-                        <div class="mb-4">
-                            <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
-                                Post
+                        <!-- Submit -->
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary w-100">
+                                {{ isset($post) ? 'Update Post' : 'Create Post' }}
                             </button>
                         </div>
-
-					</form>
-				
-				
+                    </form>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
 @endsection

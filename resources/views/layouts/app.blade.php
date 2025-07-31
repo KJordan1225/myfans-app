@@ -1,35 +1,28 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <title>{{ config('app.name') }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('build/assets/styles.min.css') }}">
-</head>
-<body class="font-sans antialiased dark:bg-gray-900">
-    @include('layouts.navigation')
-    @include('layouts.components.sidebar')
-
-    @hasSection('header')
-        <header class=" dark:bg-gray-800 shadow" style="margin-left: 250px;">
-            <div class="max-w-7xl mx-auto py-6 px-4">
-                @yield('header')
-            </div>
-        </header>
-    @endif
-
-    <main>
-        @yield('content')
-    </main>
-
-    <script src="{{ asset('build/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('build/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('build/assets/js/sidebarmenu.js') }}"></script>
-    <script src="{{ asset('build/assets/js/app.min.js') }}"></script>
-    <script src="{{ asset('build/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('build/assets/libs/simplebar/dist/simplebar.js') }}"></script>
-    <script src="{{ asset('build/assets/js/dashboard.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-</body>
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Dashboard CSS -->
+        <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+        <!-- Custom Styles -->
+        @yield('styles')
+    </head>
+    <body class="bg-light">
+        <div class="container-fluid">
+            <!-- content here -->
+            @yield('content')
+        </div>
+        <!-- Jquery JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+        <script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        
+    </body>
 </html>

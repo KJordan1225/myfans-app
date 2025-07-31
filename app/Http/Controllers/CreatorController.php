@@ -10,4 +10,14 @@ class CreatorController extends Controller
     {        
         return view('post.create');
     }
+
+    public function creatorStorePost(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    }
 }
