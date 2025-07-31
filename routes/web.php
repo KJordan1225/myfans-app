@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CreatorController;
 use App\Http\Controllers\UserProfileController;
 
 Route::get('/', function () {
@@ -17,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/@{username}', [UserProfileController::class, 'showByUsername'])
     ->where('username', '[A-Za-z0-9_-]+')
     ->name('profiles.public');
+
+    // Route::get('/creator/create', [CreatorController::class, 'creatorCreatePost'])
+	// 	->name('creator.post.create');
     
 });
 
