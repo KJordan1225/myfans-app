@@ -26,6 +26,7 @@
                                 name="title"
                                 id="title"
                                 class="form-control"
+                                style="border: 2px solid #6f42c1;" 
                                 value="{{ old('title', $post->title ?? '') }}"
                                 required>
                         </div>
@@ -36,6 +37,7 @@
                             <textarea name="body"
                                     id="body"
                                     class="form-control"
+                                    style="border: 2px solid #6f42c1;"
                                     rows="5"
                                     placeholder="Write your post here...">{{ old('body', $post->body ?? '') }}</textarea>
                         </div>
@@ -48,6 +50,7 @@
                                 name="price"
                                 id="price"
                                 class="form-control"
+                                style="border: 2px solid #6f42c1;"
                                 value="{{ old('price', $post->price ?? '') }}"
                                 placeholder="Optional price if post is paid">
                         </div>
@@ -58,6 +61,7 @@
                                 name="is_paid"
                                 id="is_paid"
                                 class="form-check-input"
+                                style="border: 2px solid #6f42c1;"
                                 value="1"
                                 {{ old('is_paid', $post->is_paid ?? false) ? 'checked' : '' }}>
                             <label class="form-check-label" for="is_paid">This is a paid post</label>
@@ -66,7 +70,7 @@
                         <!-- Visibility -->
                         <div class="mb-3">
                             <label for="visibility" class="form-label">Visibility</label>
-                            <select name="visibility" id="visibility" class="form-select" required>
+                            <select name="visibility" id="visibility" class="form-select" style="border: 2px solid #6f42c1;" required>
                                 <option value="public" {{ old('visibility', $post->visibility ?? 'public') === 'public' ? 'selected' : '' }}>Public</option>
                                 <option value="subscribers" {{ old('visibility', $post->visibility ?? '') === 'subscribers' ? 'selected' : '' }}>Subscribers Only</option>
                                 <option value="paid" {{ old('visibility', $post->visibility ?? '') === 'paid' ? 'selected' : '' }}>Paid</option>
