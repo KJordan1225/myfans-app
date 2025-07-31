@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\StorePostRequest;
 
 class CreatorController extends Controller
 {
@@ -11,13 +12,23 @@ class CreatorController extends Controller
         return view('post.create');
     }
 
-    public function creatorStorePost(Request $request)
+    public function creatorCreateMedia()
+    {        
+        return view('media.create');
+    }
+
+    public function creatorStorePost(StorePostRequest $request)
     {
-        // Validate the request data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        $post = Post::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'body' => $request->body,
+            'price' => $request->price,
+            'is_paid' => $request->boolean('is_paid'),
+            'visibility' => $request->visibility,
         ]);
+
+        return redirect()->route('creator.media.create', ['post_id' => $post->id])
+                     ->with('success', 'Post created! Now upload media.');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Dashboard
+    Add <edia
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@
         <!-- sidebar here -->
         @include('layouts.components.sidebar')
         <div class="col-md-9">
-            <h3 class="my-3">Create Post</h3>
+            <h3 class="my-3">Add Media to Post</h3>
             <hr />
             <div class="row mt-2">
                 <div class="col-md-4">
-                    <form action="{{ route('creator.post.store') }}" method="POST">
+                    <form action="#" method="POST">
                         @csrf
                         @if(isset($post))
                             @method('PUT')
