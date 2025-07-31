@@ -8,6 +8,7 @@ class CreatorController extends Controller
 {
     public function creatorCreatePost()
     {
-        dd('Creator post creation page');        return view('post.create');
+        dd('Creator post creation page');        
+        return view('post.create');
     }
 }
