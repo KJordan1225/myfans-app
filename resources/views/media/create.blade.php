@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
-@section('title')
-    Add <edia
-@endsection
-
 @section('content')
-    <div class="row">
+<div class="row">
         <!-- sidebar here -->
         @include('layouts.components.sidebar')
         <div class="col-md-9">
@@ -13,75 +9,116 @@
             <hr />
             <div class="row mt-2">
                 <div class="col-md-4">
-                    <form action="#" method="POST">
+                    <form action="#" 
+                        method="POST" 
+                        enctype="multipart/form-data"
+                    >
                         @csrf
-                        @if(isset($post))
-                            @method('PUT')
-                        @endif
 
-                        <!-- Title -->
+                        <!-- Hidden Post ID -->
+                        <input type="hidden" 
+                            name="post_id" 
+                            value="{{ old('post_id', $post_id ?? '') }}"
+                        >
+
+                        <!-- Media Type -->
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text"
-                                name="title"
-                                id="title"
-                                class="form-control"
-                                value="{{ old('title', $post->title ?? '') }}"
-                                required>
-                        </div>
-
-                        <!-- Body -->
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Post Content</label>
-                            <textarea name="body"
-                                    id="body"
-                                    class="form-control"
-                                    rows="5"
-                                    placeholder="Write your post here...">{{ old('body', $post->body ?? '') }}</textarea>
-                        </div>
-
-                        <!-- Price (only shown if paid visibility is selected with JavaScript, but always rendered for now) -->
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Price (USD)</label>
-                            <input type="number"
-                                step="0.01"
-                                name="price"
-                                id="price"
-                                class="form-control"
-                                value="{{ old('price', $post->price ?? '') }}"
-                                placeholder="Optional price if post is paid">
-                        </div>
-
-                        <!-- Is Paid -->
-                        <div class="mb-3 form-check">
-                            <input type="checkbox"
-                                name="is_paid"
-                                id="is_paid"
-                                class="form-check-input"
-                                value="1"
-                                {{ old('is_paid', $post->is_paid ?? false) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="is_paid">This is a paid post</label>
-                        </div>
-
-                        <!-- Visibility -->
-                        <div class="mb-3">
-                            <label for="visibility" class="form-label">Visibility</label>
-                            <select name="visibility" id="visibility" class="form-select" required>
-                                <option value="public" {{ old('visibility', $post->visibility ?? 'public') === 'public' ? 'selected' : '' }}>Public</option>
-                                <option value="subscribers" {{ old('visibility', $post->visibility ?? '') === 'subscribers' ? 'selected' : '' }}>Subscribers Only</option>
-                                <option value="paid" {{ old('visibility', $post->visibility ?? '') === 'paid' ? 'selected' : '' }}>Paid</option>
+                            <label for="media_type" class="form-label">Media Type</label>
+                            <select name="media_type" 
+                                id="media_type" 
+                                class="form-select"
+                                style="border: 2px solid #6f42c1;"
+                                required
+                            >
+                                <option value="image" {{ old('media_type') == 'image' ? 'selected' : '' }}>Image</option>
+                                <option value="video" {{ old('media_type') == 'video' ? 'selected' : '' }}>Video</option>
                             </select>
+                        </div>
+
+                        <!-- Media File Upload -->
+                        <div class="mb-3">
+                            <label for="path" class="form-label">Upload Media File</label>
+                            <input type="file" 
+                                name="path" id="path" 
+                                class="form-control"
+                                style="border: 2px solid #6f42c1;"
+                                required 
+                                accept="image/*,video/*"
+                            >
+                            <div id="media-preview" class="mt-3"></div>
+                        </div>
+
+                        <!-- Optional Thumbnail -->
+                        <div class="mb-3">
+                            <label for="thumbnail_path" 
+                                class="form-label"
+                            >
+                                Thumbnail (optional)
+                            </label>
+                            <input type="file" 
+                                name="thumbnail_path" 
+                                id="thumbnail_path" 
+                                class="form-control" 
+                                style="border: 2px solid #6f42c1;"
+                                accept="image/*"
+                            >
+                            <div id="thumbnail-preview" class="mt-3"></div>
                         </div>
 
                         <!-- Submit -->
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary w-100">
-                                {{ isset($post) ? 'Update Post' : 'Create Post' }}
+                            <button type="submit" 
+                                class="btn btn-primary w-100"
+                            >
+                                Upload
                             </button>
                         </div>
                     </form>
                 </div>
-            </div>            
+            </div>
         </div>
-    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    // Media file preview
+    document.getElementById('path').addEventListener('change', function (event) {
+        previewMedia(event.target, 'media-preview');
+    });
+
+    // Thumbnail preview
+    document.getElementById('thumbnail_path').addEventListener('change', function (event) {
+        previewMedia(event.target, 'thumbnail-preview');
+    });
+
+    function previewMedia(input, previewElementId) {
+        const previewEl = document.getElementById(previewElementId);
+        previewEl.innerHTML = ''; // Clear previous preview
+
+        const file = input.files[0];
+        if (!file) return;
+
+        const url = URL.createObjectURL(file);
+        const type = file.type;
+
+        let element;
+        if (type.startsWith('image/')) {
+            element = document.createElement('img');
+            element.src = url;
+            element.style.maxWidth = '100%';
+            element.className = 'img-fluid rounded border';
+        } else if (type.startsWith('video/')) {
+            element = document.createElement('video');
+            element.src = url;
+            element.controls = true;
+            element.className = 'w-100 rounded border';
+        } else {
+            element = document.createElement('p');
+            element.textContent = 'Preview not available for this file type.';
+        }
+
+        previewEl.appendChild(element);
+    }
+</script>
 @endsection

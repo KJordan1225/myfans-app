@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Post;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use App\Models\User;
+use App\Models\UserProfile;
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
 {
@@ -13,9 +14,9 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = User::with('userProfile');
-        $user_is_creator = $user->profile->is_creator ?? false;
-        return (auth()->check() && $user_is_creator);
+        // $user = User::with('userProfile')->first();
+        // $user_is_creator = $user->profile->is_creator ?? false;
+        return (TRUE);
     }
 
     /**
