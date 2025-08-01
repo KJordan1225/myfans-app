@@ -12,7 +12,7 @@
             <h3 class="my-3">Create Post</h3>
             <hr />
             <div class="row mt-2">
-                <div class="col-md-4">
+                <div class="col-md-9">
                     <form action="{{ route('creator.post.store') }}" method="POST">
                         @csrf
                         @if(isset($post))

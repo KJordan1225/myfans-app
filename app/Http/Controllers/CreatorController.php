@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Media;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Media\StoreMediaRequest;
@@ -26,6 +27,12 @@ class CreatorController extends Controller
         $post_id = request()->query('post_id');
         $media = Media::where('post_id', $post_id)->latest()->get();
         return view('media.list', compact('post_id', 'media'));
+    }
+
+    public function listAuthUserPosts()
+    {
+        $posts = Auth::user()->posts()->latest()->get();
+        return view('post.list', compact('posts'));        
     }
 
     public function creatorStorePost(StorePostRequest $request)

@@ -8,7 +8,7 @@
             <h3 class="my-3">Add Media to Post</h3>
             <hr />
             <div class="row mt-2">
-                <div class="col-md-4">
+                <div class="col-md-9">
 
                     @if ($errors->any())
                         <div class="alert alert-danger">

@@ -10,6 +10,8 @@ Route::prefix('creator')->middleware(['auth', 'creator'])->group(function () {
 		  ->name('creator.media.create');
     Route::get('/create/media/list', [CreatorController::class, 'creatorListMedia'])
 		  ->name('creator.media.list');
+    Route::get('/auth/posts/list', [CreatorController::class, 'listAuthUserPosts'])
+		  ->name('creator.auth.posts.list');
     Route::post('/create', [CreatorController::class, 'creatorStorePost'])
 		  ->name('creator.post.store');
     Route::post('/create/media', [CreatorController::class, 'creatorStoreMedia'])
