@@ -9,7 +9,19 @@
             <hr />
             <div class="row mt-2">
                 <div class="col-md-4">
-                    <form action="#" 
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input:
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('creator.media.store') }}" 
                         method="POST" 
                         enctype="multipart/form-data"
                     >

@@ -8,6 +8,10 @@ Route::prefix('creator')->middleware(['auth', 'creator'])->group(function () {
 		  ->name('creator.post.create');
     Route::get('/create/media', [CreatorController::class, 'creatorCreateMedia'])
 		  ->name('creator.media.create');
+    Route::get('/create/media/list', [CreatorController::class, 'creatorListMedia'])
+		  ->name('creator.media.list');
     Route::post('/create', [CreatorController::class, 'creatorStorePost'])
 		  ->name('creator.post.store');
+    Route::post('/create/media', [CreatorController::class, 'creatorStoreMedia'])
+		  ->name('creator.media.store');
 });
