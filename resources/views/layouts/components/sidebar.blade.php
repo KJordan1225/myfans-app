@@ -30,20 +30,15 @@
         </li>
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#subcategory-collapse" aria-expanded="{{ request()->routeIs('admin.subcategories.index') || request()->routeIs('admin.subcategories.create') || request()->routeIs('admin.subcategories.edit') ? 'show' : ''}}">
-                Subcategories
+                Creator
             </button>
             <div class="collapse {{ request()->routeIs('admin.subcategories.index') || request()->routeIs('admin.subcategories.create') || request()->routeIs('admin.subcategories.edit') ? 'show' : ''}}" id="subcategory-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a href="#" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
-                           <i class="fas fa-layer-group me-1"></i> All
+                        <a href="{{ route('creator.post.create') }}" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
+                           <i class="fas fa-layer-group me-1"></i> Create Post
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
-                           <i class="fas fa-plus me-1"></i> New Subcategory
-                        </a>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
         </li>
