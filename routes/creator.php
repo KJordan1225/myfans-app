@@ -16,4 +16,6 @@ Route::prefix('creator')->middleware(['auth', 'creator'])->group(function () {
 		  ->name('creator.post.store');
     Route::post('/create/media', [CreatorController::class, 'creatorStoreMedia'])
 		  ->name('creator.media.store');
+    Route::get('/posts/{post}/edit', [CreatorController::class, 'creatorEditPost'])
+          ->name('creator.post.edit');
 });

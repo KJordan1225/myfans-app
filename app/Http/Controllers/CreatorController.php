@@ -76,6 +76,16 @@ class CreatorController extends Controller
         return redirect()->route('creator.media.list', ['post_id' => $request->post_id])
                         ->with('success', 'Media uploaded successfully!');
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function creatorEditPost(Post $post)
+    {
+        // The $post variable is an instance of the Post model.
+        // It has been automatically fetched from the database by Laravel.
+        return view('post.edit', compact('post'));
+    }
 }
 
  
