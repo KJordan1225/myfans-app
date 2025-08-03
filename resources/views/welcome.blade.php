@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -52,10 +52,10 @@
         </header>
         <div>
             <h1 class="text-3xl lg:text-5xl font-bold mb-4 text-center text-white">
-                Welcome to Laravel
+                Welcome to {{ config('app.name') }}
             </h1>
             <p class="text-lg lg:text-xl text-center mb-6 text-white">
-                This is a simple starter template for Laravel applications.
+                This is a simple starter template for {{ config('app.name') }} applications.
             </p>
         </div>
 
