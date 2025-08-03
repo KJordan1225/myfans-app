@@ -26,19 +26,27 @@
                             <div class="mb-4">
                                 <label for="display_name" class="block font-semibold">Display Name</label>
                                 <input type="text" name="display_name" id="display_name"
-                                    class="w-full border rounded p-2 text-black" value="{{ old('display_name') }}" required>
+                                    class="w-full
+                                            rounded 
+                                            p-2 
+                                            text-black
+                                            form-control" 
+                                    value="{{ old('display_name') }}" 
+                                    required
+                                    style="border: 2px solid #6f42c1;"
+                                />
                             </div>
 
                             <!-- Bio -->
                             <div class="mb-4">
                                 <label for="bio" class="block font-semibold">Bio</label>
-                                <textarea name="bio" id="bio" class="w-full border rounded p-2 text-black" rows="4">{{ old('bio') }}</textarea>
+                                <textarea name="bio" id="bio" class="w-full form-control rounded p-2 text-black" rows="4" style="border: 2px solid #6f42c1;">{{ old('bio') }}</textarea>
                             </div>
 
                             <!-- Avatar Upload -->
                             <div class="mb-4">
                                 <label for="avatar" class="block font-semibold">Avatar (optional)</label>
-                                <input type="file" name="avatar" id="avatar" class="w-full" accept="image/*" onchange="previewImage(this, 'avatar-preview')">
+                                <input type="file" name="avatar" id="avatar" class="w-full form-control" style="border: 2px solid #6f42c1;" accept="image/*" onchange="previewImage(this, 'avatar-preview')">
                                 <div class="mt-2">
                                     <img id="avatar-preview" src="#" alt="Avatar Preview" class="hidden w-24 h-24 rounded object-cover border">
                                 </div>
@@ -48,7 +56,7 @@
                             <!-- Banner Upload -->
                             <div class="mb-4">
                                 <label for="banner" class="block font-semibold">Banner (optional)</label>
-                                <input type="file" name="banner" id="banner" class="w-full" accept="image/*" onchange="previewImage(this, 'banner-preview')">
+                                <input type="file" name="banner" id="banner" class="w-full form-control" style="border: 2px solid #6f42c1;" accept="image/*" onchange="previewImage(this, 'banner-preview')">
                                 <div class="mt-2">
                                     <img id="banner-preview" src="#" alt="Banner Preview" class="hidden w-full h-32 rounded object-cover border">
                                 </div>
@@ -57,19 +65,19 @@
                             <!-- Website -->
                             <div class="mb-4">
                                 <label for="website" class="block font-semibold">Website</label>
-                                <input type="url" name="website" id="website" class="w-full border rounded p-2 text-black" value="{{ old('website') }}">
+                                <input type="url" name="website" id="website" class="w-full form-control rounded p-2 text-black" style="border: 2px solid #6f42c1;" value="{{ old('website') }}">
                             </div>
 
                             <!-- Twitter -->
                             <div class="mb-4">
                                 <label for="twitter" class="block font-semibold">Twitter</label>
-                                <input type="text" name="twitter" id="twitter" class="w-full border rounded p-2 text-black" value="{{ old('twitter') }}">
+                                <input type="text" name="twitter" id="twitter" class="w-full form-control rounded p-2 text-black" style="border: 2px solid #6f42c1;" value="{{ old('twitter') }}">
                             </div>
 
                             <!-- Instagram -->
                             <div class="mb-4">
                                 <label for="instagram" class="block font-semibold">Instagram</label>
-                                <input type="text" name="instagram" id="instagram" class="w-full border rounded p-2 text-black" value="{{ old('instagram') }}">
+                                <input type="text" name="instagram" id="instagram" class="w-full form-control rounded p-2 text-black" style="border: 2px solid #6f42c1;" value="{{ old('instagram') }}">
                             </div>
 
                             <!-- Is Creator -->
@@ -81,8 +89,20 @@
                             </div>
 
                             <!-- Submit -->
+                             <style>
+                                .btn-purple {
+                                    color: #fff;
+                                    background-color: #6a0dad; /* A standard shade of purple */
+                                    border-color: #6a0dad;
+                                }
+                                .btn-purple:hover {
+                                    color: #fff;
+                                    background-color: #550a8d; /* A slightly darker shade for hover effect */
+                                    border-color: #550a8d;
+                                }
+                            </style>
                             <div class="mb-4">
-                                <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+                                <button type="submit" class="btn btn-purple">
                                     Save Profile
                                 </button>
                             </div>

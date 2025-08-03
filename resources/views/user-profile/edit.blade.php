@@ -32,20 +32,20 @@
                             <!-- Display Name -->
                             <div class="mb-3">
                                 <label for="display_name" class="form-label">Display Name</label>
-                                <input type="text" name="display_name" id="display_name" class="form-control"
+                                <input type="text" name="display_name" id="display_name" class="form-control" style="border: 2px solid #6f42c1;"
                                     value="{{ old('display_name', $profile->display_name) }}" required>
                             </div>
 
                             <!-- Bio -->
                             <div class="mb-3">
                                 <label for="bio" class="form-label">Bio</label>
-                                <textarea name="bio" id="bio" class="form-control" rows="4">{{ old('bio', $profile->bio) }}</textarea>
+                                <textarea name="bio" id="bio" class="form-control" style="border: 2px solid #6f42c1;" rows="4">{{ old('bio', $profile->bio) }}</textarea>
                             </div>
 
                             <!-- Avatar Upload -->
                             <div class="mb-3">
                                 <label for="avatar" class="form-label">Avatar (optional)</label>
-                                <input type="file" name="avatar" id="avatar" class="form-control" accept="image/*"
+                                <input type="file" name="avatar" id="avatar" class="form-control" style="border: 2px solid #6f42c1;" accept="image/*"
                                     onchange="previewImage(this, 'avatar-preview')">
 
                                 <div class="mt-2">
@@ -60,7 +60,7 @@
                             <!-- Banner Upload -->
                             <div class="mb-3">
                                 <label for="banner" class="form-label">Banner (optional)</label>
-                                <input type="file" name="banner" id="banner" class="form-control" accept="image/*"
+                                <input type="file" name="banner" id="banner" class="form-control" style="border: 2px solid #6f42c1;" accept="image/*"
                                     onchange="previewImage(this, 'banner-preview')">
 
                                 <div class="mt-2">
@@ -75,21 +75,21 @@
                             <!-- Website -->
                             <div class="mb-3">
                                 <label for="website" class="form-label">Website</label>
-                                <input type="url" name="website" id="website" class="form-control"
+                                <input type="url" name="website" id="website" class="form-control" style="border: 2px solid #6f42c1;"
                                     value="{{ old('website', $profile->website) }}">
                             </div>
 
                             <!-- Twitter -->
                             <div class="mb-3">
                                 <label for="twitter" class="form-label">Twitter</label>
-                                <input type="text" name="twitter" id="twitter" class="form-control"
+                                <input type="text" name="twitter" id="twitter" class="form-control" style="border: 2px solid #6f42c1;"
                                     value="{{ old('twitter', $profile->twitter) }}">
                             </div>
 
                             <!-- Instagram -->
                             <div class="mb-3">
                                 <label for="instagram" class="form-label">Instagram</label>
-                                <input type="text" name="instagram" id="instagram" class="form-control"
+                                <input type="text" name="instagram" id="instagram" class="form-control" style="border: 2px solid #6f42c1;"
                                     value="{{ old('instagram', $profile->instagram) }}">
                             </div>
 
@@ -102,7 +102,7 @@
 
                             <!-- Submit -->
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary w-100">
+                                <button type="submit" class="btn btn-primary w-10">
                                     Update Profile
                                 </button>
                             </div>
@@ -113,7 +113,7 @@
                             onsubmit="return confirm('Are you sure you want to delete your profile?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger w-100">
+                            <button type="submit" class="btn btn-danger w-10">
                                 Delete Profile
                             </button>
                         </form>              
