@@ -28,9 +28,18 @@
                 </ul>
             </div>
         </li>
-        @if (auth()->user() && auth()->user()->profile()->is_creator)
+        @if (auth()->user() && auth()->user()->profile->is_creator)        
         <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#subcategory-collapse" aria-expanded="{{ request()->routeIs('admin.subcategories.index') || request()->routeIs('admin.subcategories.create') || request()->routeIs('admin.subcategories.edit') ? 'show' : ''}}">
+            <button type="button" 
+                    class="btn btn-toggle 
+                            d-inline-flex 
+                            align-items-center 
+                            rounded border-0 
+                            collapsed" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#subcategory-collapse" 
+                    aria-expanded="{{ request()->routeIs('admin.subcategories.index') || request()->routeIs('admin.subcategories.create') || request()->routeIs('admin.subcategories.edit') ? 'show' : ''}}"
+            >
                 Creator
             </button>
             <div class="collapse {{ request()->routeIs('admin.subcategories.index') || request()->routeIs('admin.subcategories.create') || request()->routeIs('admin.subcategories.edit') ? 'show' : ''}}" id="subcategory-collapse">
@@ -43,7 +52,6 @@
                 </ul>
             </div>
         </li>
-        @endif
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#childcategory-collapse" aria-expanded="{{ request()->routeIs('admin.childcategories.index') || request()->routeIs('admin.childcategories.create') || request()->routeIs('admin.childcategories.edit') ? 'true' : 'false'}}">
                 Child categories
@@ -63,5 +71,6 @@
                 </ul>
             </div>
         </li>
+        @endif
     </ul>
 </div>
