@@ -20,6 +20,20 @@
 			<div class="p-6 text-gray-900 dark:text-gray-100">
 				{{ __("You're logged in!") }}
 			</div>
+
+			<br>
+			<br>
+			<br>
+			<div>
+				<a href="{{ route('logout') }}" 
+					onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+						Logout
+				</a>
+
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					@csrf
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
