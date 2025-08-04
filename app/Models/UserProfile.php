@@ -20,6 +20,7 @@ class UserProfile extends Model
         'twitter',
         'instagram',
         'is_creator',
+        'processing_paid',
         'stripe_id',
         'balance',
     ];

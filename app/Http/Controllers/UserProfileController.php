@@ -148,7 +148,7 @@ class UserProfileController extends Controller
 
         return redirect()
             ->route('user-profiles.edit', $userProfile)
-            ->with('success', 'Profile updated successfully.');
+            ->with('success', 'Profile updated successfully.'); 
     
     }
 
