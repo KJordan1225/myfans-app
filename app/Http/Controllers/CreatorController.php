@@ -11,31 +11,39 @@ use App\Http\Requests\Media\StoreMediaRequest;
 
 class CreatorController extends Controller
 {
-    public function creatorCreatePost()
+    /*************************
+	 * Post related functions accessible
+	 * by users w/ creator privileges
+	 *
+	 **************************/
+	 
+	 /*************************
+	 * Display create post blade
+	 *
+	 **************************/
+	
+	public function creatorCreatePost()
     {        
         return view('post.create');
     }
-
-    public function creatorCreateMedia()
-    {
-        $post_id = request()->query('post_id');
-        return view('media.create', compact('post_id'));
-    }
-
-    public function creatorListMedia()
-    {
-        $post_id = request()->query('post_id');
-        $media = Media::where('post_id', $post_id)->latest()->get();
-        return view('media.list', compact('post_id', 'media'));
-    }
-
-    public function listAuthUserPosts()
+	
+	/*************************
+	 * List all posts owned by
+	 * authenticated user
+	 **************************/
+	 
+	public function listAuthUserPosts()
     {
         $posts = Auth::user()->posts()->latest()->get();
         return view('post.list', compact('posts'));        
     }
-
-    public function creatorStorePost(StorePostRequest $request)
+	
+	/*************************
+	 * Store input from create posts blade
+	 * into database
+	 **************************/
+	
+	public function creatorStorePost(StorePostRequest $request)
     {
         $post = Post::create([
             'user_id' => auth()->id(),
@@ -49,6 +57,56 @@ class CreatorController extends Controller
         return redirect()->route('creator.media.create', ['post_id' => $post->id])
                      ->with('success', 'Post created! Now upload media.');
     }
+	
+	
+	/***********************************
+     * Show the form for editing the specified post.
+     ************************************/
+	 
+    public function creatorEditPost(Post $post)
+    {
+        // The $post variable is an instance of the Post model.
+        // It has been automatically fetched from the database by Laravel.
+        return view('post.edit', compact('post'));
+    }
+	
+	
+	
+	
+
+	/*************************
+	 * Media related functions accessible
+	 * by users w/ creator privileges
+	 *
+	 **************************/
+	 
+	/*************************
+	 * Display create media blade
+	 *
+	 **************************/
+
+    public function creatorCreateMedia()
+    {
+        $post_id = request()->query('post_id');
+        return view('media.create', compact('post_id'));
+    }
+	
+	/*************************
+	 * Display all media associated with
+	 * a particular post
+	 **************************/
+
+    public function creatorListMedia()
+    {
+        $post_id = request()->query('post_id');
+        $media = Media::where('post_id', $post_id)->latest()->get();
+        return view('media.list', compact('post_id', 'media'));
+    }
+
+    /*************************
+	 * Store input from create media blade
+	 * into database
+	 **************************/    
 
     public function creatorStoreMedia(StoreMediaRequest $request)
     {
@@ -76,16 +134,7 @@ class CreatorController extends Controller
         return redirect()->route('creator.media.list', ['post_id' => $request->post_id])
                         ->with('success', 'Media uploaded successfully!');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function creatorEditPost(Post $post)
-    {
-        // The $post variable is an instance of the Post model.
-        // It has been automatically fetched from the database by Laravel.
-        return view('post.edit', compact('post'));
-    }
+    
 }
 
  
