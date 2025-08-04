@@ -25,7 +25,6 @@ return new class extends Migration
 			$table->string('twitter')->nullable();
 			$table->string('instagram')->nullable();
             $table->boolean('is_creator')->default(false);
-            $table->boolean('processing_paid')->default(false);
             $table->string('stripe_id')->nullable();
             $table->decimal('balance', 10, 2)->default(0);
             $table->timestamps();

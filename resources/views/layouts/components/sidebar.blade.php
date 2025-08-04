@@ -7,8 +7,8 @@
             <div class="collapse {{ request()->routeIs('admin.index') ? 'show' : ''}}" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a href="#" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
-                           <i class="fas fa-dashboard me-1"></i> Overview
+                        <a href="{{ route('dashboard') }}" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
+                           <i class="fas fa-dashboard me-1"></i> Dashboard
                         </a>
                     </li>
                 </ul>
@@ -28,7 +28,9 @@
                 </ul>
             </div>
         </li>
-        @if (auth()->user() && auth()->user()->profile->is_creator)        
+        @if (auth()->user() 
+                && auth()->user()->profile->is_creator 
+                && auth()->user()->profile->processing_paid)        
         <li class="mb-1">
             <button type="button" 
                     class="btn btn-toggle 

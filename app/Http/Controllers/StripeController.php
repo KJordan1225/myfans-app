@@ -2,17 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use Stripe\Stripe;
 use Stripe\StripeClient;
-use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
+use App\Models\UserProfile;
+use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Illuminate\Support\Facades\Auth;
+use SweetAlert2\Laravel\Swal;
 
 class StripeController extends Controller
 {
     public function showCheckoutForm()
     {
+        if (auth()->check() 
+		&& auth()->user()->profile->is_creator
+		&& !auth()->user()->profile->processing_paid) {
+
+            Swal::warning([
+                'title' => 'Alert!!',
+                'html' => 'You have not paid your processing fee<br>' .
+                            '<strong>Please do so now!</strong>',
+                'icon' => 'warning',
+                'confirmButtonText' => 'Thank You.'
+            ]);
+        } 
+
+        if (auth()->check() 
+		    && auth()->user()->profile->is_creator
+		    && auth()->user()->profile->processing_paid) {  
+
+                Swal::warning([
+                    'title' => 'Warning!',
+                    'html' => 'You have already paid your life-time processing fee.<br>'.
+                            'Please do nothing further AND leave this page<br>'.
+                            'before you are charged again!',
+                    'showConfirmButton' => true,
+                    'icon' => 'warning',
+                    'confirmButtonText' => 'Continue',
+                ]);
+        }
         return view('creator.stripe.checkout');
     }
 
@@ -50,6 +79,11 @@ class StripeController extends Controller
     
     public function success()
     {
+        $user_id = Auth::id();
+        $userProfile = UserProfile::where('user_id', $user_id)->first();
+        $userProfile->processing_paid = true;
+        $userProfile->save();
+
         return view('creator.stripe.success');
     }
     

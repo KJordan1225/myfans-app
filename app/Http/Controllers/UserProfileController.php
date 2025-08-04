@@ -11,8 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
+	/**
+	 * User Profile functions.
+	 * Accessible by users w/creator privileges
+	 */
+
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the profile of authenticated user.
      */
     public function index()
     {
@@ -28,7 +34,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user profile.
      */
     public function create()
     {
@@ -36,7 +42,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user profile in database.
      */
     public function store(Request $request)
     {
@@ -81,12 +87,13 @@ class UserProfileController extends Controller
             'balance'      => 0,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Profile created successfully!');
+        return redirect()->route('dashboard')
+			->with('success', 'Profile created successfully!');
         
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user profile record.
      */
     public function show(string $id)
     {
@@ -94,7 +101,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified user profile.
      */
     public function edit(string $id)
     {
@@ -108,7 +115,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified user profile in the database.
      */
     public function update(Request $request, string $id)
     {
@@ -145,6 +152,12 @@ class UserProfileController extends Controller
         $validated['is_creator'] = $request->has('is_creator');
 
         $userProfile->update($validated);
+
+        // check if processing fee has been paid
+        if ($userProfile->is_creator && !$userProfile->processing_paid){
+            return redirect()
+            ->route('creator.stripe.checkout');
+        }
 
         return redirect()
             ->route('user-profiles.edit', $userProfile)
