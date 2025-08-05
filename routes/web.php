@@ -8,6 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// test subscription view
+Route::get('/subscriptions/payment-form', function () {
+    return view('subscriptions.payment-form');
+});
+// end test subscription view
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('subscriber_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('creator_id')->constrained('users')->unique()->cascadeOnDelete();
+            $table->string('stripe_customer_id');
             $table->string('stripe_subscription_id');
             $table->string('stripe_status');
+            $table->string('plan_name');
             $table->decimal('amount', 10, 2);
             $table->timestamp('renews_at')->nullable();
             $table->timestamps();
