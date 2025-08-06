@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -67,4 +68,17 @@ class User extends Authenticatable
     {
         return optional($this->profile)->is_creator === true;
     }
+
+    public function subscription() : HasOne
+    {
+        return $this->hasOne(Subscription::class, 'creator_id');
+    }
+
+    public function subscriptions() : BelongsToMany
+    {
+        return $this->belongsToMany(Subscription::class, 'subscription_user', 'subscriber_id', 'subscription_id')
+                    ->withTimestamps();
+    }
+
+    
 }
