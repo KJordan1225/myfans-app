@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
             __DIR__.'/../routes/web.php',
             __DIR__.'/../routes/creator.php',
              __DIR__.'/../routes/stripe.php',
+            __DIR__.'/../routes/subscription.php',
         ],
         commands: __DIR__.'/../routes/console.php',
         health: '/up',

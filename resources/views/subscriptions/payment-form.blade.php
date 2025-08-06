@@ -9,7 +9,7 @@
         <!-- sidebar here -->
         @include('layouts.components.sidebar')
         <div class="col-md-9">
-            <h3 class="my-3">Dashboard</h3>
+            <h3 class="my-3">Test Subscription Form</h3>
             <hr />
             <div class="row mt-2">
                 <div class="col-md-9">
