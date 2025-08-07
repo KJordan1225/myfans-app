@@ -39,7 +39,6 @@
                     name="payment_method" 
                     id="payment-method"
                     value="{{ old('payment_method') }}">
-                <p>Payment Method Value: {{ old('payment_method') }}</p>
             </div>
 
             <!-- Confirm Button -->

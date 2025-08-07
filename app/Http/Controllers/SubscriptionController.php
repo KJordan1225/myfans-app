@@ -151,6 +151,7 @@ class SubscriptionController extends Controller
             'plan_name' => ucfirst($plan->interval),
             'amount' => $plan->amount,
             'renews_at' => now()->add($plan->interval, 1),
+            'interval' => $plan->interval,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
