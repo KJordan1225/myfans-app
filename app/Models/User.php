@@ -72,7 +72,9 @@ class User extends Authenticatable
     public function subscription() : HasOne
     {
         return $this->hasOne(Subscription::class, 'creator_id');
-    }    
+    }
+
+    
 
     public function plans()
     {
