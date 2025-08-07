@@ -49,6 +49,8 @@ class RegisteredUserController extends Controller
             'display_name' => 'temporary display name',
         ]);
 
+        $user->assignRole('subscriber'); 
+
         event(new Registered($user));
 
         Auth::login($user);

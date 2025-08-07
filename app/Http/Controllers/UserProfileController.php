@@ -87,6 +87,11 @@ class UserProfileController extends Controller
             'balance'      => 0,
         ]);
 
+        if ($profile->is_creator) {
+            // If the user is a creator, assign the appropriate role
+            $user->assignRole('creator');
+        }   
+
         return redirect()->route('dashboard')
 			->with('success', 'Profile created successfully!');
         

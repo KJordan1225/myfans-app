@@ -3,8 +3,11 @@
 use App\Http\Middleware\CreatorOnly;
 use Illuminate\Foundation\Application;
 use Illuminate\Auth\Middleware\Authenticate;
+use Spatie\Permission\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,7 +24,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'creator' => CreatorOnly::class,
             'auth' => Authenticate::class, // Laravel's default auth middleware is already aliased by default
-            // Add more aliases here
+            'role' => RoleMiddleware::class,
+            'permission' => PermissionMiddleware::class,
+            'role_or_permission' => RoleOrPermissionMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
