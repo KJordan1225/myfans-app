@@ -18,4 +18,10 @@ Route::prefix('creator')->middleware(['auth', 'creator'])->group(function () {
 		  ->name('creator.media.store');
     Route::get('/posts/{post}/edit', [CreatorController::class, 'creatorEditPost'])
           ->name('creator.post.edit');
+
+    Route::get('/subscription/create', [CreatorController::class, 'creatorCreateSubscription'])
+          ->name('creator.subscription.create');
+    Route::post('/subscription/create', [CreatorController::class, 'creatorStoreSubscription'])
+          ->name('creator.subscription.store');
+
 });

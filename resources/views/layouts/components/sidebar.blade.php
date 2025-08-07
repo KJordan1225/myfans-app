@@ -24,7 +24,7 @@
                         <a href="{{ route('user-profiles.index') }}" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
                            <i class="fas fa-list me-1"></i> Create/Edit Your Profile
                         </a>
-                    </li>                    
+                    </li>
                 </ul>
             </div>
         </li>
@@ -49,6 +49,11 @@
                     <li>
                         <a href="{{ route('creator.post.create') }}" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
                            <i class="fas fa-layer-group me-1"></i> Create Post
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('creator.subscription.create') }}" class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded">
+                           <i class="fas fa-list me-1"></i> Create Subscription
                         </a>
                     </li>                    
                 </ul>

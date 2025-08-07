@@ -17,6 +17,9 @@ class Subscription extends Model
         'plan_name',
         'amount',
         'renews_at',
+        'interval',
+        'product_id',
+        'price_id', 
     ];
 
     public function creator() : BelongsTo

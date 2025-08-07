@@ -72,12 +72,16 @@ class User extends Authenticatable
     public function subscription() : HasOne
     {
         return $this->hasOne(Subscription::class, 'creator_id');
+    }    
+
+    public function plans()
+    {
+        return $this->hasMany(Plan::class);
     }
 
-    public function subscriptions() : BelongsToMany
+    public function subscriptions()
     {
-        return $this->belongsToMany(Subscription::class, 'subscription_user', 'subscriber_id', 'subscription_id')
-                    ->withTimestamps();
+        return $this->hasMany(Subscription::class, 'subscriber_id');
     }
 
     
