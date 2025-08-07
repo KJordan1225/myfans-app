@@ -13,6 +13,19 @@
             <hr />
             <div class="row mt-2">
                 <div class="col-md-9">
+
+				@if (session('success'))
+					<div class="alert alert-success">
+						{{ session('success') }}
+					</div>
+				@endif
+
+				@if (session('error'))
+					<div class="alert alert-danger">
+						{{ session('error') }}
+					</div>
+				@endif
+
 				
 <div class="py-12" style="margin-left: 250px;">
 	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

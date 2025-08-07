@@ -105,16 +105,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // SweetAlert2 Toasts for flash messages
     @if (session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '{{ session('success') }}',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true
-        });
+        <script>
+            console.log('Success message detected');
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: @json(session('success')),
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true
+                });
+            });
+        </script>
     @endif
+
 
     @if (session('error'))
         Swal.fire({
