@@ -28,9 +28,7 @@
                 </ul>
             </div>
         </li>
-        @if (auth()->user() 
-                && auth()->user()->profile->is_creator 
-                && auth()->user()->profile->processing_paid)        
+        @role('creator')        
         <li class="mb-1">
             <button type="button" 
                     class="btn btn-toggle 
@@ -78,6 +76,6 @@
                 </ul>
             </div>
         </li>
-        @endif
+        @endrole
     </ul>
 </div>

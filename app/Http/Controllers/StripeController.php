@@ -79,10 +79,13 @@ class StripeController extends Controller
     
     public function success()
     {
-        $user_id = Auth::id();
+        $user = Auth::user();
+        $user_id = $user->id;
         $userProfile = UserProfile::where('user_id', $user_id)->first();
         $userProfile->processing_paid = true;
         $userProfile->save();
+
+        $user->assignRole('creator');
 
         return view('creator.stripe.success');
     }

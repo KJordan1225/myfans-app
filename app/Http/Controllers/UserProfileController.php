@@ -85,12 +85,7 @@ class UserProfileController extends Controller
             'is_creator'   => $request->has('is_creator'),
             'stripe_id'    => null,
             'balance'      => 0,
-        ]);
-
-        if ($profile->is_creator) {
-            // If the user is a creator, assign the appropriate role
-            $user->assignRole('creator');
-        }   
+        ]);          
 
         return redirect()->route('dashboard')
 			->with('success', 'Profile created successfully!');
