@@ -10,6 +10,7 @@
         <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
         <!-- Custom Styles -->
         @yield('styles')
+        @livewireStyles 
     </head>
     <body class="bg-light">
         <div class="container-fluid">
@@ -25,6 +26,7 @@
         <script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        @stack('scripts')        
+        @stack('scripts') 
+        @livewireScripts       
     </body>
 </html>
