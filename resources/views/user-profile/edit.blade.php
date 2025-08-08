@@ -26,87 +26,89 @@
                         <h2 class="text-2xl font-bold mb-4 dark:text-gray-100">Edit Your Profile</h2>
 
                             <form action="{{ route('user-profiles.update', $profile) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-                            @csrf
-                            @method('PUT')
+                                @csrf
+                                @method('PUT')
 
-                            <!-- Display Name -->
-                            <div class="mb-3">
-                                <label for="display_name" class="form-label">Display Name</label>
-                                <input type="text" name="display_name" id="display_name" class="form-control" style="border: 2px solid #6f42c1;"
-                                    value="{{ old('display_name', $profile->display_name) }}" required>
-                            </div>
-
-                            <!-- Bio -->
-                            <div class="mb-3">
-                                <label for="bio" class="form-label">Bio</label>
-                                <textarea name="bio" id="bio" class="form-control" style="border: 2px solid #6f42c1;" rows="4">{{ old('bio', $profile->bio) }}</textarea>
-                            </div>
-
-                            <!-- Avatar Upload -->
-                            <div class="mb-3">
-                                <label for="avatar" class="form-label">Avatar (optional)</label>
-                                <input type="file" name="avatar" id="avatar" class="form-control" style="border: 2px solid #6f42c1;" accept="image/*"
-                                    onchange="previewImage(this, 'avatar-preview')">
-
-                                <div class="mt-2">
-                                    <img id="avatar-preview"
-                                        src="{{ $profile->avatar ? asset('storage/' . $profile->avatar) : '#' }}"
-                                        alt="Avatar Preview"
-                                        class="img-thumbnail rounded-circle {{ $profile->avatar ? '' : 'd-none' }}"
-                                        style="width: 128px; height: 128px; object-fit: cover;">
+                                <!-- Display Name -->
+                                <div class="mb-3">
+                                    <label for="display_name" class="form-label">Display Name</label>
+                                    <input type="text" name="display_name" id="display_name" class="form-control" style="border: 2px solid #6f42c1;"
+                                        value="{{ old('display_name', $profile->display_name) }}" required>
                                 </div>
-                            </div>
 
-                            <!-- Banner Upload -->
-                            <div class="mb-3">
-                                <label for="banner" class="form-label">Banner (optional)</label>
-                                <input type="file" name="banner" id="banner" class="form-control" style="border: 2px solid #6f42c1;" accept="image/*"
-                                    onchange="previewImage(this, 'banner-preview')">
-
-                                <div class="mt-2">
-                                    <img id="banner-preview"
-                                        src="{{ $profile->banner ? asset('storage/' . $profile->banner) : '#' }}"
-                                        alt="Banner Preview"
-                                        class="img-fluid rounded {{ $profile->banner ? '' : 'd-none' }}"
-                                        style="height: 160px; object-fit: cover; width: 100%;">
+                                <!-- Bio -->
+                                <div class="mb-3">
+                                    <label for="bio" class="form-label">Bio</label>
+                                    <textarea name="bio" id="bio" class="form-control" style="border: 2px solid #6f42c1;" rows="4">{{ old('bio', $profile->bio) }}</textarea>
                                 </div>
-                            </div>
 
-                            <!-- Website -->
-                            <div class="mb-3">
-                                <label for="website" class="form-label">Website</label>
-                                <input type="url" name="website" id="website" class="form-control" style="border: 2px solid #6f42c1;"
-                                    value="{{ old('website', $profile->website) }}">
-                            </div>
+                                <!-- Avatar Upload -->
+                                <div class="mb-3">
+                                    <label for="avatar" class="form-label">Avatar</label>
+                                    <input type="file" name="avatar" id="avatar" accept="image/*"
+                                        class="form-control @error('avatar') is-invalid @enderror"
+                                        onchange="previewImage(this, 'avatar-preview')">
+                                    @error('avatar')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="mt-2">
+                                        <img id="avatar-preview" src="#" alt="Avatar Preview"
+                                            class="d-none border rounded" style="width: 100px; height: 100px; object-fit: cover;">
+                                    </div>
+                                </div>
 
-                            <!-- Twitter -->
-                            <div class="mb-3">
-                                <label for="twitter" class="form-label">Twitter</label>
-                                <input type="text" name="twitter" id="twitter" class="form-control" style="border: 2px solid #6f42c1;"
-                                    value="{{ old('twitter', $profile->twitter) }}">
-                            </div>
 
-                            <!-- Instagram -->
-                            <div class="mb-3">
-                                <label for="instagram" class="form-label">Instagram</label>
-                                <input type="text" name="instagram" id="instagram" class="form-control" style="border: 2px solid #6f42c1;"
-                                    value="{{ old('instagram', $profile->instagram) }}">
-                            </div>
+                                <!-- Banner Upload -->
+                                <div class="mb-3">
+                                    <label for="banner" class="form-label">Banner</label>
+                                    <input type="file" name="banner" id="banner" accept="image/*"
+                                        class="form-control @error('banner') is-invalid @enderror"
+                                        onchange="previewImage(this, 'banner-preview')">
+                                    @error('banner')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="mt-2">
+                                        <img id="banner-preview" src="#" alt="Banner Preview"
+                                            class="d-none border rounded" style="width: 100%; max-height: 200px; object-fit: cover;">
+                                    </div>
+                                </div>
 
-                            <!-- Is Creator -->
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" name="is_creator" id="is_creator" value="1"
-                                    {{ old('is_creator', $profile->is_creator) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_creator">I'm a content creator</label>
-                            </div>
 
-                            <!-- Submit -->
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary w-10">
-                                    Update Profile
-                                </button>
-                            </div>
-                        </form>
+                                <!-- Website -->
+                                <div class="mb-3">
+                                    <label for="website" class="form-label">Website</label>
+                                    <input type="url" name="website" id="website" class="form-control" style="border: 2px solid #6f42c1;"
+                                        value="{{ old('website', $profile->website) }}">
+                                </div>
+
+                                <!-- Twitter -->
+                                <div class="mb-3">
+                                    <label for="twitter" class="form-label">Twitter</label>
+                                    <input type="text" name="twitter" id="twitter" class="form-control" style="border: 2px solid #6f42c1;"
+                                        value="{{ old('twitter', $profile->twitter) }}">
+                                </div>
+
+                                <!-- Instagram -->
+                                <div class="mb-3">
+                                    <label for="instagram" class="form-label">Instagram</label>
+                                    <input type="text" name="instagram" id="instagram" class="form-control" style="border: 2px solid #6f42c1;"
+                                        value="{{ old('instagram', $profile->instagram) }}">
+                                </div>
+
+                                <!-- Is Creator -->
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" name="is_creator" id="is_creator" value="1"
+                                        {{ old('is_creator', $profile->is_creator) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="is_creator">I'm a content creator</label>
+                                </div>
+
+                                <!-- Submit -->
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary w-10">
+                                        Update Profile
+                                    </button>
+                                </div>
+                            </form>
 
                         <!-- Delete Button -->
                         <form action="{{ route('user-profiles.destroy', $profile) }}" method="POST"
@@ -124,24 +126,26 @@
         </div>
     </div>
 
+    <!-- JS for Preview -->
     <script>
-    function previewImage(input, targetId) {
-        const file = input.files[0];
-        const preview = document.getElementById(targetId);
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            const preview = document.getElementById(previewId);
 
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = "#";
-            preview.classList.add('hidden');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "#";
+                preview.classList.add('d-none');
+            }
         }
-    }
-</script>
+    </script>
+
 @endsection
 
 

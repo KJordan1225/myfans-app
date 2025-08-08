@@ -22,7 +22,7 @@ class Post extends Model
         return $this->belongsto(User::class);
     }
 
-    public function media(): HasMany
+    public function media_1(): HasMany
     {
         return $this->hasMany(Media::class);
     }

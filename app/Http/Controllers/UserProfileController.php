@@ -65,20 +65,19 @@ class UserProfileController extends Controller
                             ->with('warning', 'You already have a profile.');
         }
 
-        $avatarPath = $request->hasFile('avatar')
-            ? $request->file('avatar')->store('avatars', 'public')
-            : null;
+            if ($request->hasFile('avatar')) {
+                $profile->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+            }
 
-        $bannerPath = $request->hasFile('banner')
-            ? $request->file('banner')->store('banners', 'public')
-            : null;
+            if ($request->hasFile('banner')) {
+                $profile->addMediaFromRequest('banner')->toMediaCollection('banner');
+            }
+
 
         $profile = UserProfile::create([
             'user_id'      => $user->id,
             'display_name' => $request->input('display_name'),
             'bio'          => $request->input('bio'),
-            'avatar'       => $avatarPath,
-            'banner'       => $bannerPath,
             'website'      => $request->input('website'),
             'twitter'      => $request->input('twitter'),
             'instagram'    => $request->input('instagram'),
